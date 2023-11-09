@@ -30,17 +30,17 @@ int _execline(data_shell  *data)
 int _exit_shell(data_shell *data)
 {
 	unsigned int ustatus;
-	int is_digit;
-	int str_len;
+	int isdigit;
+	int slen;
 	int big_number;
 
 	if (data->args[1] != NULL)
 	{
 		ustatus = atoi(data->args[1]);
-		is_digit = is_digit(data->args[1]);
-		str_len = strlen(data->args[1]);
+		isdigit = is_digit(data->args[1]);
+		slen = str_len(data->args[1]);
 		big_number = ustatus > (unsigned int)INT_MAX;
-		if (!is_digit || str_len > 10 || big_number)
+		if (!isdigit || slen > 10 || big_number)
 		{
 			get_error(data, 2);
 			data->status = 2;
@@ -60,7 +60,7 @@ int (*get_builtin(char *cmd))(data_shell *)
 {
 	builtin_t builtin[] = {
 		{ "env", env },
-		{ "exit", exit_shell },
+		{ "exit", _exit_shell },
 		{ "setenv", set_env },
 		{ "unsetenv", unset_env },
 		{ "cd", _cdshell },
@@ -71,7 +71,7 @@ int (*get_builtin(char *cmd))(data_shell *)
 
 	for (i = 0; builtin[i].name; i++)
 	{
-		if (strcmp(builtin[i].name, cmd) == 0)
+		if (str_cmp(builtin[i].name, cmd) == 0)
 			break;
 	}
 

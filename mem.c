@@ -28,7 +28,7 @@ void mem_cpy(void *newptr, unsigned int size, const void *ptr)
  * if new_size == old_size, returns ptr without changes.
  * if malloc fails, returns NULL.
  */
-void *realloc(void *ptr, unsigned int new_size, unsigned int old_size)
+void *re_alloc(void *ptr, unsigned int new_size, unsigned int old_size)
 {
 	void *newptr;
 

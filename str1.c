@@ -1,16 +1,16 @@
 #include "shell.h"
 
 /**
- * strdup - duplicates a str in the heap memory.
+ * str_dup - duplicates a str in the heap memory.
  * @s: Type char pointer str
  * Return: duplicated str
  */
-char *strdup(const char *s)
+char *str_dup(const char *s)
 {
 	char *new;
 	size_t len;
 
-	len = _strlen(s);
+	len = strlen(s);
 	new = malloc(sizeof(char) * (len + 1));
 	if (new == NULL)
 		return (NULL);
@@ -19,11 +19,11 @@ char *strdup(const char *s)
 }
 
 /**
- * strlen - Returns the length of a string.
+ * str_len - Returns the length of a string.
  * @s: Type char pointer
  * Return: Always 0.
  */
-int strlen(const char *s)
+int str_len(const char *s)
 {
 	int len;
 
@@ -34,13 +34,13 @@ int strlen(const char *s)
 }
 
 /**
- * _cmpchars - compare chars of strings
+ * _cmp_chars - compare chars of strings
  * @str: input string.
  * @delim: delimiter.
  *
  * Return: 1 if are equals, 0 if not.
  */
-int _cmpchars(char str[], const char *delim)
+int _cmp_chars(char str[], const char *delim)
 {
 	unsigned int i, j, k;
 
@@ -61,13 +61,13 @@ int _cmpchars(char str[], const char *delim)
 }
 
 /**
- * strtok - splits a string by some delimiter.
+ * str_tok - splits a string by some delimiter.
  * @str: input string.
  * @delim: delimeter.
  *
  * Return: string splitted.
  */
-char *strtok(char str[], const char *delim)
+char *str_tok(char str[], const char *delim)
 {
 	static char *splitted, *str_end;
 	char *str_start;
@@ -78,7 +78,7 @@ char *strtok(char str[], const char *delim)
 		if (cmp_chars(str, delim))
 			return (NULL);
 		splitted = str; /*Store first address*/
-		i = _strlen(str);
+		i = strlen(str);
 		str_end = &str[i]; /*Store last address*/
 	}
 	str_start = splitted;

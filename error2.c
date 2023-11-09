@@ -12,10 +12,10 @@ char *err_env(data_shell *data)
 	char *verstr_;
 	char *msg;
 
-	verstr_ = aux_itoa(data->counter);
+	verstr_ = _itoa(data->counter);
 	msg = ": Unable to add/remove from environment\n";
-	length = _strlen(data->av[0]) + _strlen(verstr_);
-	length += _strlen(data->args[0]) + _strlen(msg) + 4;
+	length = strlen(data->av[0]) + strlen(verstr_);
+	length += strlen(data->args[0]) + strlen(msg) + 4;
 	err = malloc(sizeof(char) * (length + 1));
 	if (err == 0)
 	{
@@ -24,13 +24,13 @@ char *err_env(data_shell *data)
 		return (NULL);
 	}
 
-	_strcpy(err, data->av[0]);
-	_strcat(err, ": ");
-	_strcat(err, verstr_);
-	_strcat(err, ": ");
-	_strcat(err, data->args[0]);
-	_strcat(err, msg);
-	_strcat(err, "\0");
+	strcpy(err, data->av[0]);
+	strcat(err, ": ");
+	strcat(err, verstr_);
+	strcat(err, ": ");
+	strcat(err, data->args[0]);
+	strcat(err, msg);
+	strcat(err, "\0");
 	free(verstr_);
 
 	return (err);
@@ -47,9 +47,9 @@ char *err_path_126(data_shell *data)
 	char *verstr_;
 	char *err;
 
-	verstr_ = aux_itoa(data->counter);
-	length = _strlen(data->av[0]) + _strlen(verstr_);
-	length += _strlen(datash->args[0]) + 24;
+	verstr_ = _itoa(data->counter);
+	length = strlen(data->av[0]) + strlen(verstr_);
+	length += strlen(datash->args[0]) + 24;
 	err = malloc(sizeof(char) * (length + 1));
 	if (err == 0)
 	{
@@ -57,13 +57,13 @@ char *err_path_126(data_shell *data)
 		free(verstr_);
 		return (NULL);
 	}
-	_strcpy(err, data->av[0]);
-	_strcat(err, ": ");
-	_strcat(err, verstr_);
-	_strcat(err, ": ");
-	_strcat(err, data->args[0]);
-	_strcat(err, ": Permission denied\n");
-	_strcat(er, "\0");
+	strcpy(err, data->av[0]);
+	strcat(err, ": ");
+	strcat(err, verstr_);
+	strcat(err, ": ");
+	strcat(err, data->args[0]);
+	strcat(err, ": Permission denied\n");
+	strcat(er, "\0");
 	free(verstr_);
 	return (err);
 }

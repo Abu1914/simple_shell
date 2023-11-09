@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * strcat - concatenate two strings
+ * str_cat - concatenate two strings
  * @dest: char pointer the dest of the copied str
  * @src: const char pointer source of str
  * Return: the dest
  */
-char *strcat(char *dest, const char *src)
+char *str_cat(char *dest, const char *src)
 {
 	int i;
 	int j;
@@ -24,12 +24,12 @@ char *strcat(char *dest, const char *src)
 	return (dest);
 }
 /**
- *  *strcpy - copies the string pointed to by src.
+ *  *str_cpy - copies the string pointed to by src.
  *  @dest: type char pointer the dest of the copied str
  *  @src: type char pointer the source of str
  *  Return: the dest.
  */
-char *strcpy(char *src, char *dest)
+char *str_cpy(char *src, char *dest)
 {
 
 	size_t a;
@@ -43,12 +43,12 @@ char *strcpy(char *src, char *dest)
 	return (dest);
 }
 /**
- * strcmp - function that compares two strings.
+ * str_cmp - function that compares two strings.
  * @s1: type str compared
  * @s2: type str compared
  * Return: Always 0.
  */
-int strcmp(char *s1, char *s2)
+int str_cmp(char *s1, char *s2)
 {
 	int i;
 
@@ -62,12 +62,12 @@ int strcmp(char *s1, char *s2)
 	return (0);
 }
 /**
-  * strchr - locates a character in a string,
+  * str_chr - locates a character in a string,
   * @s: string.
   * @c: character.
   * Return: the pointer to the first occurrence of the character c.
   */
-char *strchr(char *s, char c)
+char *str_chr(char *s, char c)
 {
 	unsigned int i = 0;
 
@@ -79,12 +79,12 @@ char *strchr(char *s, char c)
 	return ('\0');
 }
 /**
- * strspn - gets the length of a prefix substring.
+ * str_spn - gets the length of a prefix substring.
  * @s: initial segment.
  * @accept: accepted bytes.
  * Return: the number of accepted bytes.
  */
-int strspn(char *s, char *accept)
+int str_spn(char *s, char *accept)
 {
 	int i, j, bool;
 

@@ -50,7 +50,7 @@ char *_itoa(int n)
 		n1 = n;
 	}
 
-	lenght--;
+	length--;
 	do {
 		*(buffer + lenght) = (n1 % 10) + '0';
 		n1 = n1 / 10;
@@ -62,11 +62,11 @@ char *_itoa(int n)
 }
 
 /**
- * atoi - converts a string to an integer.
+ * _atoi - converts a string to an integer.
  * @s: input string.
  * Return: integer.
  */
-int atoi(char *s)
+int _atoi(char *s)
 {
 	unsigned int count = 0, size = 0, oi = 0, pn = 1, m = 1, i;
 

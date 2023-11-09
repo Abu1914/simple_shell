@@ -38,28 +38,28 @@ char *which(char *cmd, char **environ)
 	path = _getenv("PATH", environ);
 	if (path)
 	{
-		ptr_path = strdup(path);
-		len_cmd = strlen(cmd);
-		token_path = strtok(ptr_path, ":");
+		ptr_path = str_dup(path);
+		len_cmd = str_len(cmd);
+		token_path = str_tok(ptr_path, ":");
 		i = 0;
 		while (token_path != NULL)
 		{
 			if (_iscdir(path, &i))
 				if (stat(cmd, &st) == 0)
 					return (cmd);
-			len_dir = strlen(token_path);
+			len_dir = str_len(token_path);
 			dir = malloc(len_dir + len_cmd + 2);
-			strcpy(dir, token_path);
-			strcat(dir, "/");
-			strcat(dir, cmd);
-			strcat(dir, "\0");
+			str_cpy(dir, token_path);
+			str_cat(dir, "/");
+			str_cat(dir, cmd);
+			str_cat(dir, "\0");
 			if (stat(dir, &st) == 0)
 			{
 				free(ptr_path);
 				return (dir);
 			}
 			free(dir);
-			token_path = strtok(NULL, ":");
+			token_path = str_tok(NULL, ":");
 		}
 		free(ptr_path);
 		if (stat(cmd, &st) == 0)
@@ -131,7 +131,7 @@ int _check_error_cmd(char *dir, data_shell *data)
 		return (1);
 	}
 
-	if (strcmp(data->args[0], dir) != 0)
+	if (str_cmp(data->args[0], dir) != 0)
 	{
 		if (access(dir, X_OK) == -1)
 		{

@@ -13,28 +13,28 @@ char *strcat_cd(data_shell *data, char *msg, char *err, char verstr_)
 {
 	char *illegal_flag;
 
-	_strcpy(err, data->av[0]);
-	_strcat(err, ": ");
-	_strcat(err, verstr_);
-	_strcat(err, ": ");
-	_strcat(err, data->args[0]);
-	_strcat(err, msg);
+	strcpy(err, data->av[0]);
+	strcat(err, ": ");
+	strcat(err, verstr_);
+	strcat(err, ": ");
+	strcat(err, data->args[0]);
+	strcat(err, msg);
 	if (data->args[1][0] == '-')
 	{
 		illegal_flag = malloc(3);
 		illegal_flag[0] = '-';
 		illegal_flag[1] = data->args[1][1];
 		illegal_flag[2] = '\0';
-		_strcat(err, illegal_flag);
+		strcat(err, illegal_flag);
 		free(illegal_flag);
 	}
 	else
 	{
-		_strcat(err, data->args[1]);
+		strcat(err, data->args[1]);
 	}
 
-	_strcat(err, "\n");
-	_strcat(err, "\0");
+	strcat(err, "\n");
+	strcat(err, "\0");
 	return (err);
 }
 
@@ -48,7 +48,7 @@ char *err_get_cd(data_shell *data)
 	int length, len_id;
 	char *err, *verstr_, *msg;
 
-	verstr_ = aux_itoa(data->counter);
+	verstr_ = _itoa(data->counter);
 	if (data->args[1][0] == '-')
 	{
 		msg = ": Illegal option ";
@@ -57,11 +57,11 @@ char *err_get_cd(data_shell *data)
 	else
 	{
 		msg = ": can't cd to ";
-		len_id = _strlen(data->args[1]);
+		len_id = strlen(data->args[1]);
 	}
 
-	length = _strlen(data->av[0]) + _strlen(data->args[0]);
-	length += _strlen(ver_str) + _strlen(msg) + len_id + 5;
+	length = strlen(data->av[0]) + strlen(data->args[0]);
+	length += strlen(ver_str) + strlen(msg) + len_id + 5;
 	err = malloc(sizeof(char) * (length + 1));
 
 	if (err == 0)
@@ -88,9 +88,9 @@ char *err_not_found(data_shell *data)
 	char *err;
 	char *verstr_;
 
-	verstr_ = aux_itoa(data->counter);
-	length = _strlen(data->av[0]) + _strlen(verstr_);
-	length += _strlen(data->args[0]) + 16;
+	verstr_ = _itoa(data->counter);
+	length = strlen(data->av[0]) + strlen(verstr_);
+	length += strlen(data->args[0]) + 16;
 	err = malloc(sizeof(char) * (length + 1));
 	if (err == 0)
 	{
@@ -98,13 +98,13 @@ char *err_not_found(data_shell *data)
 		free(verstr_);
 		return (NULL);
 	}
-	_strcpy(err, data->av[0]);
-	_strcat(err, ": ");
-	_strcat(err, verstr_);
-	_strcat(err, ": ");
-	_strcat(err, data->args[0]);
-	_strcat(err, ": not found\n");
-	_strcat(err, "\0");
+	strcpy(err, data->av[0]);
+	strcat(err, ": ");
+	strcat(err, verstr_);
+	strcat(err, ": ");
+	strcat(err, data->args[0]);
+	strcat(err, ": not found\n");
+	strcat(err, "\0");
 	free(verstr_);
 	return (err);
 }
@@ -121,23 +121,23 @@ char *err_exit_shell(data_shell *data)
 	char *err;
 	char *verstr_;
 
-	verstr_ = aux_itoa(data->counter);
-	length = _strlen(data->av[0]) + _strlen(verstr_);
-	length += _strlen(data->args[0]) + _strlen(data->args[1]) + 23;
+	verstr_ = _itoa(data->counter);
+	length = strlen(data->av[0]) + strlen(verstr_);
+	length += strlen(data->args[0]) + strlen(data->args[1]) + 23;
 	err = malloc(sizeof(char) * (length + 1));
 	if (err == 0)
 	{
 		free(verstr_);
 		return (NULL);
 	}
-	_strcpy(err, data->av[0]);
-	_strcat(err, ": ");
-	_strcat(err, verstr_);
-	_strcat(err, ": ");
-	_strcat(err, data->args[0]);
-	_strcat(err, ": Illegal number: ");
-	_strcat(err, data->args[1]);
-	_strcat(err, "\n\0");
+	strcpy(err, data->av[0]);
+	strcat(err, ": ");
+	strcat(err, verstr_);
+	strcat(err, ": ");
+	strcat(err, data->args[0]);
+	strcat(err, ": Illegal number: ");
+	strcat(err, data->args[1]);
+	strcat(err, "\n\0");
 	free(verstr_);
 
 	return (err);

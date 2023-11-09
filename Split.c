@@ -70,11 +70,11 @@ void _addnodes(sep_list **head_s, line_list **head_l, char *input)
 		}
 	}
 
-	line = strtok(input, ";|&");
+	line = str_tok(input, ";|&");
 	do {
 		line = _swapchar(line, 1);
 		Add_line_node_end(head_l, line);
-		line = strtok(NULL, ";|&");
+		line = str_tok(NULL, ";|&");
 	} while (line != NULL);
 
 }
@@ -152,7 +152,7 @@ int _splitcommands(data_shell *data, char *input)
 		if (loop == 0)
 			break;
 
-		_gonext(&list_s, &list_l, datash);
+		_gonext(&list_s, &list_l, data);
 
 		if (list_l != NULL)
 			list_l = list_l->next;
@@ -187,7 +187,7 @@ char **_splitline(char *input)
 		exit(EXIT_FAILURE);
 	}
 
-	token = strtok(input, TOK_DELIM);
+	token = str_tok(input, TOK_DELIM);
 	tokens[0] = token;
 
 	for (i = 1; token != NULL; i++)
@@ -195,14 +195,14 @@ char **_splitline(char *input)
 		if (i == bsize)
 		{
 			bsize += TOK_BUFSIZE;
-			tokens = reallocdp(tokens, i, sizeof(char *) * bsize);
+			tokens = realloc_dp(tokens, i, sizeof(char *) * bsize);
 			if (tokens == NULL)
 			{
 				write(STDERR_FILENO, ": allocation error\n", 18);
 				exit(EXIT_FAILURE);
 			}
 		}
-		token = strtok(NULL, TOK_DELIM);
+		token = str_tok(NULL, TOK_DELIM);
 		tokens[i] = token;
 	}
 

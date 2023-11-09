@@ -13,26 +13,26 @@ void _cddot(data_shell *data)
 	char *dir, *cp_pwd, *cp_strtok_pwd;
 
 	getcwd(pwd, sizeof(pwd));
-	cp_pwd = strdup(pwd);
+	cp_pwd = str_dup(pwd);
 	_setenv("OLDPWD", cp_pwd, data);
 	dir = data->args[1];
-	if (strcmp(".", dir) == 0)
+	if (str_cmp(".", dir) == 0)
 	{
 		_setenv("PWD", cp_pwd, data);
 		free(cp_pwd);
 		return;
 	}
-	if (strcmp("/", cp_pwd) == 0)
+	if (str_cmp("/", cp_pwd) == 0)
 	{
 		free(cp_pwd);
 		return;
 	}
 	cp_strtok_pwd = cp_pwd;
 	_revstring(cp_strtok_pwd);
-	cp_strtok_pwd = _strtok(cp_strtok_pwd, "/");
+	cp_strtok_pwd = str_tok(cp_strtok_pwd, "/");
 	if (cp_strtok_pwd != NULL)
 	{
-		cp_strtok_pwd = _strtok(NULL, "\0");
+		cp_strtok_pwd = str_tok(NULL, "\0");
 		if (cp_strtok_pwd != NULL)
 			_revstring(cp_strtok_pwd);
 	}
@@ -71,10 +71,10 @@ void _cdto(data_shell *data)
 		return;
 	}
 
-	cp_pwd = strdup(pwd);
+	cp_pwd = str_dup(pwd);
 	_setenv("OLDPWD", cp_pwd, data);
 
-	cp_dir = _strdup(dir);
+	cp_dir = str_dup(dir);
 	_setenv("PWD", cp_dir, data);
 
 	free(cp_pwd);
@@ -97,14 +97,14 @@ void _cdprevious(data_shell *data)
 	char *p_pwd, *p_oldpwd, *cp_pwd, *cp_oldpwd;
 
 	getcwd(pwd, sizeof(pwd));
-	cp_pwd = strdup(pwd);
+	cp_pwd = str_dup(pwd);
 
 	p_oldpwd = _getenv("OLDPWD", data->environ);
 
 	if (p_oldpwd == NULL)
 		cp_oldpwd = cp_pwd;
 	else
-	cp_oldpwd = strdup(p_oldpwd);
+	cp_oldpwd = str_dup(p_oldpwd);
 
 	_setenv("OLDPWD", cp_pwd, data);
 
@@ -115,7 +115,7 @@ void _cdprevious(data_shell *data)
 
 	p_pwd = _getenv("PWD", data->environ);
 
-	write(STDOUT_FILENO, p_pwd, strlen(p_pwd));
+	write(STDOUT_FILENO, p_pwd, str_len(p_pwd));
 	write(STDOUT_FILENO, "\n", 1);
 
 	free(cp_pwd);
@@ -139,7 +139,7 @@ void cd_tohome(data_shell *data)
 	char pwd[PATH_MAX];
 
 	getcwd(pwd, sizeof(pwd));
-	p_pwd = strdup(pwd);
+	p_pwd = str_dup(pwd);
 
 	home = _getenv("HOME", data->environ);
 

@@ -9,15 +9,15 @@
 int _cdshell(data_shell *data)
 {
 	char *dir;
-	int ishome, ishome2, isddash
+	int ishome, ishome2, isddash;
 
 	dir = data->args[1];
 
 	if (dir != NULL)
 	{
-		ishome = strcmp("$HOME", dir);
-		ishome2 = strcmp("~", dir);
-		isddash = strcmp("--", dir);
+		ishome = str_cmp("$HOME", dir);
+		ishome2 = str_cmp("~", dir);
+		isddash = str_cmp("--", dir);
 	}
 
 	if (dir == NULL || !ishome || !ishome2 || !isddash)
@@ -26,13 +26,13 @@ int _cdshell(data_shell *data)
 		return (1);
 	}
 
-	if (strcmp("-", dir) == 0)
+	if (str_cmp("-", dir) == 0)
 	{
 		_cdprevious(data);
 		return (1);
 	}
 
-	if (strcmp(".", dir) == 0 || strcmp("..", dir) == 0)
+	if (str_cmp(".", dir) == 0 || str_cmp("..", dir) == 0)
 	{
 		_cddot(data);
 		return (1);
