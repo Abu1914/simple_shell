@@ -1,106 +1,38 @@
 #include "shell.h"
 
 /**
- * str_cat - concatenate two strings
- * @dest: char pointer the dest of the copied str
- * @src: const char pointer source of str
- * Return: the dest
+ * _strcat - concatenate two strings
+ * @dest: string to be appended to
+ * @src: string to append
+ * Return: concatenated string
  */
-char *str_cat(char *dest, const char *src)
+char *_strcat(char *dest, char *src)
 {
-	int i;
-	int j;
+	int len = 0;
+	int len2 = 0;
+	int total_len = 0;
+	int b = 0;
 
-	for (i = 0; dest[i] != '\0'; i++)
-		;
-
-	for (j = 0; src[j] != '\0'; j++)
+	while (dest[len] != '\0')
 	{
-		dest[i] = src[j];
-		i++;
+		len++;
+		total_len++;
+	}
+	while (src[len2] != '\0')
+	{
+		len2++;
+		total_len++;
 	}
 
-	dest[i] = '\0';
-	return (dest);
-}
-/**
- *  *str_cpy - copies the string pointed to by src.
- *  @dest: type char pointer the dest of the copied str
- *  @src: type char pointer the source of str
- *  Return: the dest.
- */
-char *str_cpy(char *src, char *dest)
-{
+	dest = _realloc(dest, len, sizeof(char) * total_len + 1);
 
-	size_t a;
-
-	for (a = 0; src[a] != '\0'; a++)
+	while (src[b] != '\0')
 	{
-		dest[a] = src[a];
+		dest[len] = src[b];
+		len++;
+		b++;
 	}
-	dest[a] = '\0';
+	dest[len] = '\0';
 
 	return (dest);
-}
-/**
- * str_cmp - function that compares two strings.
- * @s1: type str compared
- * @s2: type str compared
- * Return: Always 0.
- */
-int str_cmp(char *s1, char *s2)
-{
-	int i;
-
-	for (i = 0; s1[i] == s2[i] && s1[i]; i++)
-		;
-
-	if (s1[i] > s2[i])
-		return (1);
-	if (s1[i] < s2[i])
-		return (-1);
-	return (0);
-}
-/**
-  * str_chr - locates a character in a string,
-  * @s: string.
-  * @c: character.
-  * Return: the pointer to the first occurrence of the character c.
-  */
-char *str_chr(char *s, char c)
-{
-	unsigned int i = 0;
-
-	for (; *(s + i) != '\0'; i++)
-		if (*(s + i) == c)
-			return (s + i);
-	if (*(s + i) == c)
-		return (s + i);
-	return ('\0');
-}
-/**
- * str_spn - gets the length of a prefix substring.
- * @s: initial segment.
- * @accept: accepted bytes.
- * Return: the number of accepted bytes.
- */
-int str_spn(char *s, char *accept)
-{
-	int i, j, bool;
-
-	for (i = 0; *(s + i) != '\0'; i++)
-	{
-		bool = 1;
-		for (j = 0; *(accept + j) != '\0'; j++)
-		{
-			if (*(s + i) == *(accept + j))
-			{
-				bool = 0;
-				break;
-			}
-		}
-		if (bool == 1)
-			break;
-	}
-	return (i);
 }
