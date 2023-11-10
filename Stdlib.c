@@ -52,9 +52,9 @@ char *_itoa(int n)
 
 	length--;
 	do {
-		*(buffer + lenght) = (n1 % 10) + '0';
+		*(buffer + length) = (n1 % 10) + '0';
 		n1 = n1 / 10;
-		lenght--;
+		length--;
 	}
 	while (n1 > 0)
 		;

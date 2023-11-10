@@ -43,7 +43,7 @@ void set_data(data_shell *data, char **av)
 
 	for (i = 0; environ[i]; i++)
 	{
-		data->environ[i] = strdup(environ[i]);
+		data->environ[i] = str_dup(environ[i]);
 	}
 
 	data->environ[i] = NULL;
@@ -60,12 +60,12 @@ void set_data(data_shell *data, char **av)
  */
 int main(int ac, char **av)
 {
-		data_shell data;
+	data_shell data;
 	(void) ac;
 
 	signal(SIGINT, _getsigint);
 	set_data(&data, av);
-	shell_loop(&data);
+	_shell_loop(&data);
 	_freedata(&data);
 	if (data.status < 0)
 		return (255);

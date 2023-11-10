@@ -123,8 +123,8 @@ void _printsyntax_error(data_shell *data, char *input, int i, int bool)
 	msg2 = ": Syntax error: \"";
 	msg3 = "\" unexpected\n";
 	counter = _itoa(data->counter);
-	length = strlen(data->av[0]) + strlen(counter);
-	length += strlen(msg) + strlen(msg2) + strlen(msg3) + 2;
+	length = str_len(data->av[0]) + str_len(counter);
+	length += str_len(msg) + str_len(msg2) + str_len(msg3) + 2;
 
 	error = malloc(sizeof(char) * (length + 1));
 	if (error == 0)
@@ -132,13 +132,13 @@ void _printsyntax_error(data_shell *data, char *input, int i, int bool)
 		free(counter);
 		return;
 	}
-	strcpy(error, data->av[0]);
-	strcat(error, ": ");
-	strcat(error, counter);
-	strcat(error, msg2);
-	strcat(error, msg);
-	strcat(error, msg3);
-	strcat(error, "\0");
+	str_cpy(error, data->av[0]);
+	str_cat(error, ": ");
+	str_cat(error, counter);
+	str_cat(error, msg2);
+	str_cat(error, msg);
+	str_cat(error, msg3);
+	str_cat(error, "\0");
 
 	write(STDERR_FILENO, error, length);
 	free(error);
@@ -159,8 +159,8 @@ int _checksyntax_error(data_shell *data, char *input)
 	int f_char = 0;
 	int i = 0;
 
-	_fchar = _firstchar(input, &begin);
-	if (_fchar == -1)
+	f_char = _firstchar(input, &begin);
+	if (f_char == -1)
 	{
 		_printsyntax_error(data, input, begin, 0);
 		return (1);

@@ -7,7 +7,7 @@
  * @n: size of line
  * @j: size of buffer
  */
-void _bringline(char **lineptr, size_t j, char *buffer, size_t *n)
+void _bringline(char **lineptr, size_t *n, char *buffer, size_t j)
 {
 
 	if (*lineptr == NULL)
@@ -29,7 +29,7 @@ void _bringline(char **lineptr, size_t j, char *buffer, size_t *n)
 	}
 	else
 	{
-		strcpy(*lineptr, buffer);
+		str_cpy(*lineptr, buffer);
 		free(buffer);
 	}
 }
@@ -41,7 +41,7 @@ void _bringline(char **lineptr, size_t j, char *buffer, size_t *n)
  * @stream: stream to read from
  * Return: the number of bytes
  */
-ssize_t _getline(char **lineptr, size_t *n, File *stream)
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 {
 	int i;
 	static ssize_t input;
@@ -72,7 +72,7 @@ ssize_t _getline(char **lineptr, size_t *n, File *stream)
 			break;
 		}
 		if (input >= BUFSIZE)
-			buffer = realloc(buffer, input, input + 1);
+			buffer = re_alloc(buffer, input, input + 1);
 		buffer[input] = t;
 		input++;
 	}
@@ -91,5 +91,5 @@ ssize_t _getline(char **lineptr, size_t *n, File *stream)
 void _getsigint(int sig)
 {
 	(void)sig;
-	write(STDOUT_FILENO, "\n^-^ ", 5);
+	_puts("\n$ ");
 }

@@ -12,14 +12,14 @@ char *_copyinfo(char *name, char *value)
 	char *new;
 	int len_name, len_value, len;
 
-	len_name = strlen(name);
-	len_value = strlen(value);
+	len_name = str_len(name);
+	len_value = str_len(value);
 	len = len_name + len_value + 2;
 	new = malloc(sizeof(char) * (len));
-	strcpy(new, name);
-	strcat(new, "=");
-	strcat(new, value);
-	strcat(new, "\0");
+	str_cpy(new, name);
+	str_cat(new, "=");
+	str_cat(new, value);
+	str_cat(new, "\0");
 
 	return (new);
 }
@@ -39,20 +39,20 @@ void _setenv(char *name, char *value, data_shell *data)
 
 	for (i = 0; data->environ[i]; i++)
 	{
-		var_env = strdup(data->environ[i]);
-		name_env = strtok(var_env, "=");
-		if (strcmp(name_env, name) == 0)
+		var_env = str_dup(data->environ[i]);
+		name_env = str_tok(var_env, "=");
+		if (str_cmp(name_env, name) == 0)
 		{
 			free(data->environ[i]);
-			data->environ[i] = copy_info(name_env, value);
+			data->environ[i] = _copyinfo(name_env, value);
 			free(var_env);
 			return;
 		}
 		free(var_env);
 	}
 
-	data->environ = reallocdp(data->environ, i, sizeof(char *) * (i + 2));
-	data->environ[i] = copy_info(name, value);
+	data->environ = realloc_dp(data->environ, i, sizeof(char *) * (i + 2));
+	data->environ[i] = _copyinfo(name, value);
 	data->environ[i + 1] = NULL;
 }
 
@@ -97,9 +97,9 @@ int unset_env(data_shell *data)
 	k = -1;
 	for (i = 0; data->environ[i]; i++)
 	{
-		var_env = strdup(data->environ[i]);
-		name_env = strtok(var_env, "=");
-		if (strcmp(name_env, data->args[1]) == 0)
+		var_env = str_dup(data->environ[i]);
+		name_env = str_tok(var_env, "=");
+		if (str_cmp(name_env, data->args[1]) == 0)
 		{
 			k = i;
 		}

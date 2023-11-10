@@ -10,7 +10,7 @@ char *str_dup(const char *s)
 	char *new;
 	size_t len;
 
-	len = strlen(s);
+	len = str_len(s);
 	new = malloc(sizeof(char) * (len + 1));
 	if (new == NULL)
 		return (NULL);
@@ -75,10 +75,10 @@ char *str_tok(char str[], const char *delim)
 
 	if (str != NULL)
 	{
-		if (cmp_chars(str, delim))
+		if (_cmp_chars(str, delim))
 			return (NULL);
 		splitted = str; /*Store first address*/
-		i = strlen(str);
+		i = str_len(str);
 		str_end = &str[i]; /*Store last address*/
 	}
 	str_start = splitted;

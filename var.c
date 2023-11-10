@@ -20,8 +20,8 @@ void _check_env(r_var **h, char *in, data_shell *data)
 		{
 			if (_envr[row][chr] == '=')
 			{
-				lval = strlen(_envr[row] + chr + 1);
-				add_rvar_node(h, j, _envr[row] + chr + 1, lval);
+				lval = str_len(_envr[row] + chr + 1);
+				Add_rvar_node(h, j, _envr[row] + chr + 1, lval);
 				return;
 			}
 
@@ -38,7 +38,7 @@ void _check_env(r_var **h, char *in, data_shell *data)
 			break;
 	}
 
-	add_rvar_node(h, j, NULL, 0);
+	Add_rvar_node(h, j, NULL, 0);
 }
 
 /**
@@ -54,29 +54,29 @@ int _checkvars(r_var **h, char *in, char *st, data_shell *data)
 {
 	int i, lst, lpd;
 
-	lst = strlen(st);
-	lpd = strlen(data->pid);
+	lst = str_len(st);
+	lpd = str_len(data->pid);
 
 	for (i = 0; in[i]; i++)
 	{
 		if (in[i] == '$')
 		{
 			if (in[i + 1] == '?')
-				add_rvar_node(h, 2, st, lst), i++;
+				Add_rvar_node(h, 2, st, lst), i++;
 			else if (in[i + 1] == '$')
-				add_rvar_node(h, 2, data->pid, lpd), i++;
+				Add_rvar_node(h, 2, data->pid, lpd), i++;
 			else if (in[i + 1] == '\n')
-				add_rvar_node(h, 0, NULL, 0);
+				Add_rvar_node(h, 0, NULL, 0);
 			else if (in[i + 1] == '\0')
-				add_rvar_node(h, 0, NULL, 0);
+				Add_rvar_node(h, 0, NULL, 0);
 			else if (in[i + 1] == ' ')
-				add_rvar_node(h, 0, NULL, 0);
+				Add_rvar_node(h, 0, NULL, 0);
 			else if (in[i + 1] == '\t')
-				add_rvar_node(h, 0, NULL, 0);
+				Add_rvar_node(h, 0, NULL, 0);
 			else if (in[i + 1] == ';')
-				add_rvar_node(h, 0, NULL, 0);
+				Add_rvar_node(h, 0, NULL, 0);
 			else
-				_checkenv(h, in + i, data);
+				_check_env(h, in + i, data);
 		}
 	}
 
@@ -151,7 +151,7 @@ char *_repvar(char *input, data_shell *data)
 	status = _itoa(data->status);
 	head = NULL;
 
-	olen = check_vars(&head, input, status, data);
+	olen = _checkvars(&head, input, status, data);
 
 	if (head == NULL)
 	{
@@ -173,7 +173,7 @@ char *_repvar(char *input, data_shell *data)
 	new_input = malloc(sizeof(char) * (nlen + 1));
 	new_input[nlen] = '\0';
 
-	new_input = replaced_input(&head, input, new_input, nlen);
+	new_input = _replacedinput(&head, input, new_input, nlen);
 
 	free(input);
 	free(status);

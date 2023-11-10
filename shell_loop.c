@@ -28,7 +28,7 @@ char *_withoutcomment(char *in)
 
 	if (up_to != 0)
 	{
-		in = realloc(in, i, up_to + 1);
+		in = re_alloc(in, i, up_to + 1);
 		in[up_to] = '\0';
 	}
 
@@ -49,8 +49,8 @@ void _shell_loop(data_shell *data)
 	loop = 1;
 	while (loop == 1)
 	{
-		write(STDIN_FILENO, "^-^ ", 4);
-		input = read_line(&i_eof);
+		write(STDIN_FILENO, "$ ", 2);
+		input = _readline(&i_eof);
 		if (i_eof != -1)
 		{
 			input = _withoutcomment(input);
@@ -74,4 +74,25 @@ void _shell_loop(data_shell *data)
 			free(input);
 		}
 	}
+}
+
+/**
+ * _puts - a function that writes a string  to the stdout
+ * @str: the string
+ * Return: the number of characters written or -1 if failed
+ */
+
+ssize_t _puts(char *str)
+{
+	ssize_t a, len;
+
+	for (a = 0; str[a]; a++)
+		;
+	len = write(1, str, a);
+	if (len != a)
+	{
+		perror("Fatal Error");
+		return (-1);
+	}
+	return (len);
 }

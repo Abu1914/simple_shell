@@ -8,7 +8,7 @@
  *
  * Return: No return.
  */
-void mem_cpy(void *newptr, unsigned int size, const void *ptr)
+void mem_cpy(void *newptr, const void *ptr, unsigned int size)
 {
 	char *char_ptr = (char *)ptr;
 	char *char_newptr = (char *)newptr;

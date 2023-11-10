@@ -13,25 +13,25 @@ int get_error(data_shell *data, int eval)
 	switch (eval)
 	{
 	case -1:
-		error = error_env(data);
+		error = err_env(data);
 		break;
 	case 126:
-		error = error_path_126(data);
+		error = err_path_126(data);
 		break;
 	case 127:
-		error = error_not_found(data);
+		error = err_not_found(data);
 		break;
 	case 2:
-		if (strcmp("exit", data->args[0]) == 0)
-			error = error_exit_shell(data);
-		else if (strcmp("cd", data->args[0]) == 0)
-			error = error_get_cd(data);
+		if (str_cmp("exit", data->args[0]) == 0)
+			error = err_exit_shell(data);
+		else if (str_cmp("cd", data->args[0]) == 0)
+			error = err_get_cd(data);
 		break;
 	}
 
 	if (error)
 	{
-	write(STDERR_FILENO, error, strlen(error));
+	write(STDERR_FILENO, error, str_len(error));
 	free(error);
 	}
 
@@ -48,23 +48,23 @@ int get_help(data_shell *data)
 {
 	if (data->args[1] == 0)
 		help_general();
-	else if (strcmp(data->args[1], "setenv") == 0)
+	else if (str_cmp(data->args[1], "setenv") == 0)
 		help_setenv();
-	else if (strcmp(data->args[1], "env") == 0)
+	else if (str_cmp(data->args[1], "env") == 0)
 		help_env();
-	else if (strcmp(data->args[1], "unsetenv") == 0)
+	else if (str_cmp(data->args[1], "unsetenv") == 0)
 		help_unsetenv();
-	else if (strcmp(data->args[1], "help") == 0)
+	else if (str_cmp(data->args[1], "help") == 0)
 		help();
-	else if (strcmp(data->args[1], "exit") == 0)
+	else if (str_cmp(data->args[1], "exit") == 0)
 		help_exit();
-	else if (strcmp(data->args[1], "cd") == 0)
+	else if (str_cmp(data->args[1], "cd") == 0)
 		help_cd();
-	else if (strcmp(data->args[1], "alias") == 0)
+	else if (str_cmp(data->args[1], "alias") == 0)
 		help_alias();
 	else
 		write(STDERR_FILENO, data->args[0],
-			strlen(data->args[0]));
+			str_len(data->args[0]));
 
 	data->status = 0;
 	return (1);

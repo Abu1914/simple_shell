@@ -165,7 +165,7 @@ int set_env(data_shell *data);
 int unset_env(data_shell *data);
 
 /* functions of error1.c */
-char *strcat_cd(data_shell *data, char *msg, char *err, char verstr_);
+char *strcat_cd(data_shell *data, char *msg, char *err, char *verstr_);
 char *err_get_cd(data_shell *data);
 char *err_not_found(data_shell *data);
 char *err_exit_shell(data_shell *data);
@@ -179,7 +179,7 @@ int get_error(data_shell *data, int eval);
 int get_help(data_shell *data);
 
 /* functions of get_Line.c */
-void _bringline(char **lineptr, size_t j, char *buffer, size_t *n);
+void _bringline(char **lineptr, size_t *n, char *buffer, size_t j);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 void _getsigint(int sig);
 
@@ -190,13 +190,14 @@ int main(int ac, char **av);
 char *_readline(int *i_eof);
 
 /* functions of mem.c */
-void mem_cpy(void *newptr, unsigned int size, const void *ptr);
+void mem_cpy(void *newptr, const void *ptr, unsigned int size);
 void *re_alloc(void *ptr, unsigned int new_size, unsigned int old_size);
 char **realloc_dp(char **ptr, unsigned int new_size, unsigned int old_size);
 
 /* functions of shell_loop.c */
 char *_withoutcomment(char *in);
 void _shell_loop(data_shell *data);
+ssize_t _puts(char *str);
 
 /* functions of str.c */
 char *str_cat(char *dest, const char *src);
