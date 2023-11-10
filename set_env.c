@@ -28,14 +28,14 @@ int _findenv(list_t *env, char *string)
 /**
  * _unsetenv - remove node in environmental linked list
  * @env: linked list
- * @str: user's typed in command (e.g. "unsetenv MAIL")
+ * @string: user's typed in command (e.g. "unsetenv MAIL")
  * Return: 0 on success
  */
 int _unsetenv(list_t **env, char **string)
 {
 	int index = 0, j = 0;
 
-	if (str[1] == NULL)
+	if (string[1] == NULL)
 	{
 		write(STDOUT_FILENO, "Too few arguments\n", 18);
 		free_double_p(string);
@@ -60,7 +60,7 @@ int _unsetenv(list_t **env, char **string)
 /**
  * _setenv - create or modify existing environmental variable in linked list
  * @env: linked list
- * @str: user's typed in command (e.g. "setenv USER Superman")
+ * @string: user's typed in command (e.g. "setenv USER Superman")
  * Return: 0 on success, 1 on fail
  */
 int _setenv(list_t **env, char **string)

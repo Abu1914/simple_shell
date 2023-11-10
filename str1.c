@@ -21,7 +21,7 @@ int _strlen(char *str, int pos, char delm)
 
 /**
  * t_size - returns number of delim ignoring continuous delim
- * @str: user's command typed into shell
+ * @string: user's command typed into shell
  * @delm: delimeter (e.g. " ");
  * Return: number of delims so that (num token = delims + 1)
  */
@@ -46,7 +46,7 @@ int t_size(char *string, char delm)
 
 /**
  * ign_delm - returns a version of string without preceeding delims
- * @str: string
+ * @string: string
  * @delm: delimiter (e.g. " ")
  * Return: new string (e.g. "    ls -l" --> "ls -l")
  */
@@ -69,7 +69,7 @@ char **_str_tok(char *str, char *delm)
 	char **toks = NULL, d_ch;
 
 	d_ch = delm[0];
-	str = ignore_delm(str, d_ch);
+	str = ign_delm(str, d_ch);
 	buffsize = t_size(str, d_ch);
 	toks = malloc(sizeof(char *) * (buffsize + 2));
 	if (toks == NULL)
@@ -80,7 +80,7 @@ char **_str_tok(char *str, char *delm)
 	{
 		if (str[si] != d_ch)
 		{
-			len = t_strlen(str, si, d_ch);
+			len = _strlen(str, si, d_ch);
 			toks[p] = malloc(sizeof(char) * (len + 1));
 			if (toks[p] == NULL)
 				return (NULL);

@@ -23,7 +23,7 @@ int _atoi(char *s)
 
 /**
  * __exit - frees user input and then exits main program with a value
- * @str: user's command into shell (e.g. "exit 99")
+ * @string: user's command into shell (e.g. "exit 99")
  * @env: bring in environmental variable to free at error
  * @num: bring in nth user command line input to print in error message
  * @command: bring in command to free
@@ -38,7 +38,7 @@ int __exit(char **string, list_t *env, int num, char **command)
 
 	if (e_value == -1)
 	{
-		illegal_number(string[1], num, env);
+		wrong_number(string[1], num, env);
 		free_double_p(string);
 		return (2);
 	}

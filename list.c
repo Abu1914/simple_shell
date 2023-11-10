@@ -28,7 +28,7 @@ size_t print_list(list_t *head)
 			write(STDOUT_FILENO, _list->var, c);
 			write(STDOUT_FILENO, "\n", 1);
 		}
-		c_list = _list->next;
+		_list = _list->next;
 		count++;
 	}
 	return (count);
@@ -72,7 +72,7 @@ list_t *add_end_node(list_t **h, char *str)
 
 /**
  * delete_nodeint_at_index - removing node at index
- * @head: input head address
+ * @h: input head address
  * @index: input index
  * Return: 1 if success, -1 if fail
  */

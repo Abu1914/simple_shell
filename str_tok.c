@@ -25,8 +25,8 @@ int _size(char *str, char delm)
 /**
  * _tok - tokenizes a string even the continuous delim with empty string
  * (e.g. path --> ":/bin::/bin/usr" )
- * @str: user's command typed into shell
- * @delm: delimeter (e.g. " ");
+ * @string: user's command typed into shell
+ * @delim: delimeter (e.g. " ");
  * Return: an array of tokens (e.g. {"\0", "/bin", "\0", "/bin/usr"}
  * (purpose is to have which command look through current directory if ":")
  */
@@ -45,7 +45,7 @@ char **_tok(char *string, char *delim)
 		se++;
 	while (si < se)
 	{
-		len = t_strlen(string, si, d_ch);
+		len = _strlen(string, si, d_ch);
 		toks[p] = malloc(sizeof(char) * (len + 1));
 		if (toks[p] == NULL)
 			return (NULL);

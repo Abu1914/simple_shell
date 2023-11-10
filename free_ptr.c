@@ -1,8 +1,8 @@
 #include "shell.h"
 
 /**
- * free_double_ptr - free malloced arrays
- * @str: array of strings
+ * free_double_p - free malloced arrays
+ * @string: array of strings
  */
 void free_double_p(char **string)
 {

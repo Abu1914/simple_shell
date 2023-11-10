@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * get_line - stores into malloced buffer the user's command into shell
+ * _getline - stores into malloced buffer the user's command into shell
  * @string: buffer
  * Return: number of characters read
  */

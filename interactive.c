@@ -32,7 +32,7 @@ void _interactive(list_t *env)
 	}
 	n_command = command;
 	command = _ignore(command);
-	n_line = _str_tok(command, "\n");
+	n_line = _tok(command, "\n");
 	if (n_command != NULL)
 		free(n_command);
 	n = 0;
@@ -40,7 +40,7 @@ void _interactive(list_t *env)
 	{
 		command_line_no++;
 		token = NULL;
-		token = _str_tok(n_line[n], " ");
+		token = _tok(n_line[n], " ");
 		exit_stat = built_in(token, env, command_line_no, n_line);
 		if (exit_stat)
 		{

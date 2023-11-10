@@ -1,8 +1,8 @@
 #include "shell.h"
 
 /**
- * which_cmd - fleshes out command by appending it to a matching PATH directory
- * @str: first command user typed into shell (e.g. "ls" if user typed "ls -l")
+ * which_cmd - fleshes out command by appending it to a matching PATH dir
+ * @string: first command user type into shell (e.g "ls" if user typed "ls -l")
  * @env: environmental variable
  * Return: a copy of fleshed out command (e.g. "/bin/ls" if originally "ls")
  */

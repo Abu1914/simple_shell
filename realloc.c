@@ -2,7 +2,7 @@
 
 /**
  * _realloc - allocate memory and set all values to 0
- * @ptr: pointer to the memory previously allocated (malloc(old_size))
+ * @pointer: pointer to the memory previously allocated (malloc(old_size))
  * @old_size: size previously allocated
  * @new_size: new size to reallocate
  * Return: pointer to reallocated memory

@@ -14,7 +14,7 @@ void c_exit(char **string, list_t *env)
 
 /**
  * _execve - execute command user typed into shell
- * @s: command user typed
+ * @st: command user typed
  * @env: environmental variable
  * @num: nth user command; to be used in error message
  * Return: 0 on success
@@ -25,16 +25,16 @@ int _execve(char **st, list_t *env, int num)
 	int status = 0, t = 0;
 	pid_t pid;
 
-	if (access(s[0], F_OK) == 0)
+	if (access(st[0], F_OK) == 0)
 	{
 		holder = st[0];
 		t = 1;
 	}
 	else
-		holder = _which(st[0], env);
+		holder = which_cmd(st[0], env);
 	if (access(holder, X_OK) != 0)
 	{
-		not_found(s[0], num, env);
+		n_found(st[0], num, env);
 		free_double_p(st);
 		return (127);
 	}
@@ -45,7 +45,7 @@ int _execve(char **st, list_t *env, int num)
 		{
 			if (execve(holder, st, NULL) == -1)
 			{
-				not_found(s[0], num, env);
+				n_found(st[0], num, env);
 				c_exit(st, env);
 			}
 		}
