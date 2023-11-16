@@ -19,11 +19,6 @@ char *_str_dup(char *string, int cs)
                 len++;
         len++;
 
-        if (cs >= len) {
-                /* cs is greater than or equal to the length of the string */
-                return (NULL);
-        }
-
         /* allocate memory but exclude environmental variable title (PATH) */
         duplicate_str = malloc(sizeof(char) * (len - cs));
         if (duplicate_str == NULL)
@@ -37,4 +32,3 @@ char *_str_dup(char *string, int cs)
         }
         return (duplicate_str);
 }
-
