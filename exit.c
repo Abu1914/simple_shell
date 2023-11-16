@@ -42,7 +42,7 @@ int __exit(char **string, list_t *env, int num, char **command)
 		free_double_p(string);
 		return (2);
 	}
-	free_double_p(string); /* free user input before exiting program */
+	free_double_p(string);
 	free_linked_list(env);
 	if (command != NULL)
 		free_double_p(command);
